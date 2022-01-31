@@ -23,16 +23,21 @@ const words = [
 
 let viewWordsButton = document.getElementsByClassName("view-words-button")[0];
 let wordGeneratorButton = document.getElementsByClassName("generate-word-button")[0];
+let prevWordsButton = document.getElementsByClassName("prev-words-button")[0];
+let playAgainButton = document.getElementsByClassName("play-again-button")[0];
 
 let viewWordsPanel = document.getElementsByClassName("view-words")[0];
 let wordGeneratorPanel = document.getElementsByClassName("word-generator")[0];
-
 let wordImageContainer = document.getElementsByClassName("word-image")[0];
 let wordWordContainer = document.getElementsByClassName("word-word")[0];
 
 let wordList = document.getElementsByClassName("word-list")[0];
+let modal = document.getElementsByClassName("modal")[0];
+
 // hide panel
 viewWordsPanel.style.display = "none";
+wordList.style.display = "none";
+modal.style.display = "none";
 
 // add words to panel
 words.forEach(word => {
@@ -64,12 +69,26 @@ viewWordsButton.addEventListener("click", () => {
     }
 });
 
+prevWordsButton.addEventListener("click", () => {
+    if(wordList.style.display === "none"){
+        wordList.style.display = "flex";
+    } else {
+        wordList.style.display = "none";
+    }
+})
+
 let wordsLeft = [...words];
 
 let getRandomWord = () => {
     let word = wordsLeft.splice(Math.floor(Math.random()*wordsLeft.length), 1);
     return word[0];
 };
+
+let finished = () => {
+    modal.style.display = "flex";
+}
+
+
 
 wordGeneratorButton.addEventListener("click", () => {
 
@@ -79,6 +98,10 @@ wordGeneratorButton.addEventListener("click", () => {
     }
 
     let word = getRandomWord();
+
+    if(!word){
+        finished();
+    }
 
     let element = document.createElement("h4");
     element.innerText = word.word;
@@ -94,6 +117,18 @@ wordGeneratorButton.addEventListener("click", () => {
     wordListElement.innerText = word.word;
     wordList.appendChild(wordListElement);
 
-
 });
+
+playAgainButton.addEventListener("click", () => {
+    modal.style.display = "none";
+    wordsLeft = [...words];
+
+    wordWordContainer.innerHTML = "";
+    wordImageContainer.innerHTML = "";
+
+    let title = wordList.childNodes[0];
+    console.log(title);
+    wordList.innerHTML = "";
+    wordList.appendChild(title);
+})
 
