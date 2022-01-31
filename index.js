@@ -30,7 +30,7 @@ let wordGeneratorPanel = document.getElementsByClassName("word-generator")[0];
 let wordImageContainer = document.getElementsByClassName("word-image")[0];
 let wordWordContainer = document.getElementsByClassName("word-word")[0];
 
-
+let wordList = document.getElementsByClassName("word-list")[0];
 // hide panel
 viewWordsPanel.style.display = "none";
 
@@ -38,7 +38,7 @@ viewWordsPanel.style.display = "none";
 words.forEach(word => {
 
     let div = document.createElement("div");
-    let text = document.createElement("p");
+    let text = document.createElement("h4");
     let image = document.createElement("img");
 
     div.className = "view-word-word";
@@ -89,6 +89,11 @@ wordGeneratorButton.addEventListener("click", () => {
     image.src = word.image;
     wordImageContainer.innerHTML = "";
     wordImageContainer.appendChild(image);
+
+    let wordListElement = document.createElement("h5");
+    wordListElement.innerText = word.word;
+    wordList.appendChild(wordListElement);
+
 
 });
 
