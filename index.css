@@ -170,6 +170,10 @@ button{
 
 .word-generator img{
     min-height: 24rem;
-    max-height: 28rem;
+    max-height: 24rem;
+}
+
+.word-word h4{
+    font-size: 24px;
 }
 

@@ -75,18 +75,24 @@ prevWordsButton.addEventListener("click", () => {
     } else {
         wordList.style.display = "none";
     }
-})
+});
 
 let wordsLeft = [...words];
 
 let getRandomWord = () => {
     let word = wordsLeft.splice(Math.floor(Math.random()*wordsLeft.length), 1);
-    return word[0];
-};
 
+    word = word[0];
+    let first = word.word.charAt(0).toUpperCase()
+    let rest = word.word.slice(1);
+
+    word.word = first + rest;
+
+    return word;
+};
 let finished = () => {
     modal.style.display = "flex";
-}
+};
 
 
 
@@ -130,5 +136,5 @@ playAgainButton.addEventListener("click", () => {
     console.log(title);
     wordList.innerHTML = "";
     wordList.appendChild(title);
-})
+});
 
